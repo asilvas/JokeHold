@@ -1,0 +1,28 @@
+{
+  "name": "joke-hold",
+  "preferGlobal": true,
+  "version": "0.1.0",
+  "author": "asilvas <aaronsilvas@gmail.com>",
+  "description": "Wouldn't you like to know?",
+  "contributors": [ 
+    {
+      "name": "Aaron Silvas",
+      "email": "aaronsilvas@gmail.com"
+    } 
+  ],
+  "scripts": {
+    "start": "node ./server.js"
+  },
+  "main": "./server.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/asilvas/JokeHold.git"
+  },
+  "dependencies" : {
+    "msnodesql"   :  "latest"
+  },
+  "license": "All rights reserved",
+  "engines": {
+    "node": ">=0.8"
+  }
+}
