@@ -19,7 +19,9 @@
     "url": "https://github.com/asilvas/JokeHold.git"
   },
   "dependencies" : {
-    "msnodesql"   :  "latest"
+    "azure":  "latest",
+    "azure-cli": "latest",
+    "async": "latest"
   },
   "license": "All rights reserved",
   "engines": {
