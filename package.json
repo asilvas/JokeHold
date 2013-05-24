@@ -21,7 +21,14 @@
   "dependencies" : {
     "azure":  "latest",
     "azure-cli": "latest",
-    "async": "latest"
+    "async": "latest",
+    "express": "latest",
+    "passport": "latest",
+    "passport-azure-store": "latest",
+    "passport-facebook": "latest",
+    "passport-google-oauth": "latest",
+    "passport-twitter": "latest",
+    "connect": "latest"
   },
   "license": "All rights reserved",
   "engines": {
