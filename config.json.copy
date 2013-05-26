@@ -1,0 +1,9 @@
+{
+    "store":{
+        "driver":"azure",
+        "azure":{
+            "name": "azure_account_name",
+            "accessKey": "azure_storage_access_key"
+        }
+    }
+}
