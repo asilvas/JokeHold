@@ -22,6 +22,7 @@
     "azure":  "latest",
     "azure-cli": "latest",
     "async": "latest",
+    "ejs": "latest",
     "express": "latest",
     "passport": "latest",
     "passport-azure-store": "latest",
