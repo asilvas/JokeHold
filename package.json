@@ -22,6 +22,7 @@
     "azure":  "latest",
     "azure-cli": "latest",
     "async": "latest",
+    "connect": "latest",
     "ejs": "latest",
     "express": "latest",
     "passport": "latest",
@@ -29,7 +30,7 @@
     "passport-facebook": "latest",
     "passport-google-oauth": "latest",
     "passport-twitter": "latest",
-    "connect": "latest"
+    "socket.io": "latest"
   },
   "license": "All rights reserved",
   "engines": {
