@@ -8,7 +8,8 @@ var
 //  apiV1 = require('./controller/apiV1'),
     http = require('http'),
     path = require('path'),
-    routes = require('./routes')
+    routes = require('./routes/routes'),
+    auth = require('./auth/auth')
 ;
 
 
@@ -60,37 +61,36 @@ function initWeb(cb){
     });
 
     app.configure(function () {
-        app.set('port', port);
+        //app.set('port', port);
         app.set('views', __dirname + '/views');
         app.set('view engine', 'ejs');
         
         app.use(express.json());
-        //app.use(express.urlencoded());
+        app.use(express.urlencoded());
         //app.use(express.multipart());
     
         app.use(express.favicon());
         app.use(express.logger('dev'));
-        //app.use(express.bodyParser());
+        app.use(express.bodyParser());
         app.use(express.methodOverride());
-        app.use(express.cookieParser('RAWRANDSTUFF99!'));
-        app.use(express.session());
+        app.use(express.cookieParser('wowsah'));
+        /*app.use(express.session({
+    		secret: config.session.secret,
+			store: session_store
+		}));*/
         app.use("/res", express.static(path.join(__dirname, 'res')));
     });
     app.configure('development', function () {
         app.use(express.errorHandler());
     });
 
-    routes.init(app);
+    auth.init(app);
+    routes.init(app, io);
     
     
-    //app.get('/api/v1/:cmd?/:id?', apiV1.all);
-    //app.post('/api/v1/:cmd?/:id?', apiV1.all);
     server.listen(port, function () {
         console.log("Listening on ", port, "at", process.env.IP);
     });
-
-
-    routes.init(app, io);
     
     
 }
