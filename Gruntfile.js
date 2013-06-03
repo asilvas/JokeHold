@@ -10,8 +10,8 @@ module.exports = function(grunt) {
     copy: {
         main: {
             files: [
-                {expand: true, src: ['package.json'], dest: 'bin/package.json'},
-                {expand: true, src: ['config.json'], dest: 'bin/config.json'},
+                {expand: false, src: ['package.json'], dest: 'bin/package.json'},
+                {expand: false, src: ['config.json'], dest: 'bin/config.json'},
                 {expand: true, cwd: 'src/', src: ['**/*.js'], dest: 'bin/'},
                 {expand: true, cwd: 'src/', src: ['**/*.ejs'], dest: 'bin/'}
             ]

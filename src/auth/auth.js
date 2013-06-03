@@ -34,10 +34,10 @@ function userGetOrCreate(profile, cb) {
 
 function onRequest(req, res, next) {
 	if (req.path != '/' && req.path.indexOf('/user/') < 0 && req.path.indexOf('/res/') < 0) {
-		if (!req.user) { // not logged in
+		/*if (!req.user) { // not logged in
 			res.redirect('/user/login');
 			return;
-		}
+		}*/
 	}
 
 	next();
@@ -58,7 +58,7 @@ exports.init = function(app) {
 		});*/
 	});
 
-	//app.use(passport.initialize());
+	app.use(passport.initialize());
 	app.use(passport.session());
 
 	// google

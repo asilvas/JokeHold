@@ -15,7 +15,7 @@ exports.render = function(req, res, master, view, options) {
 	options.req = this.req;
 	options.res = this.res;
 
-    var viewPath = path.join('./view', view + '.ejs');
+    var viewPath = path.join('./views', view + '.ejs');
     var template = templateCache[viewPath];
     if (!template){ // cache views
         template = {

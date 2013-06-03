@@ -9,11 +9,11 @@ exports.init = function(app, io) {
     app.get('/user/login', user.login);
 	app.get('/user/logout', user.logout);
 
-    io.sockets.on('connection', function (socket) {
+    /*io.sockets.on('connection', function (socket) {
       socket.on('ping', function (data) {
         console.log("RCV: ", data);
         socket.emit('pong', { pong: 'PONG!' });
       });
-    });
+    });*/
     
 }

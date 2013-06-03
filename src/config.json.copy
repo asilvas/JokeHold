@@ -5,5 +5,8 @@
             "name": "azure_account_name",
             "accessKey": "azure_storage_access_key"
         }
+    },
+    "session":{
+        "secret": "some_random_secret"
     }
 }

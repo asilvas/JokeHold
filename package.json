@@ -11,7 +11,7 @@
     } 
   ],
   "scripts": {
-    "start": "node ./bin/server.js",
+    "start": "node ./bin/server.js ./bin",
     "test": "grunt --verbose"
   },
   "main": "./server.js",
@@ -25,6 +25,8 @@
     "connect": "latest",
     "ejs": "latest",
     "express": "latest",
+    "express-session-azure": "latest",
+    "extend": "latest",
     "passport": "latest",
     "passport-azure-store": "latest",
     "passport-facebook": "latest",
