@@ -6,21 +6,19 @@ var
 
 exports.DataStore = DataStore;
 
+function keyToString(str) {
+    return new Buffer("Hello World").toString('base64').replace("=", "_");
+}
+
+function keyFromString(key) {
+    return new Buffer(key.replace("_", "="), 'base64').toString('ascii');
+}
+
 function DataStore() {
-    if (!DataStore.isInitialized) {
-        DataStore.isInitialized = true;
-        
-        // azure lib uses env vars instead...
-        process.env.AZURE_STORAGE_ACCOUNT = config.store.azure.name;
-        process.env.AZURE_STORAGE_ACCESS_KEY = config.store.azure.accessKey;
-    }
-    
-    this.table = azure.createTableService();
+    this.table = azure.createTableService(config.store.azure.name, config.store.azure.accessKey);
 }
 
 var p = DataStore.prototype;
-
-DataStore.isInitialized = false;
 
 p.onStart = function(cb)
 {    
@@ -55,7 +53,7 @@ p.userGetOrCreateByPassport = function(profile, cb) {
             result = {
                 PartitionKey: profile.id,
                 RowKey: '1',
-                name: profile.name,
+                name: JSON.stringify(profile.name),
                 displayName: profile.displayName,
                 authProvider: profile.provider,
                 userType: "guest",
@@ -64,6 +62,10 @@ p.userGetOrCreateByPassport = function(profile, cb) {
 
             me.userInsert(result, cb);
         } else {
+            delete result._;
+            if (result.name) {
+                result.name = JSON.parse(result.name);
+            }
             if (result.emails && result.emails.indexOf('[') == 0) {
                 result.emails = JSON.parse(result.emails);
             }
@@ -73,10 +75,17 @@ p.userGetOrCreateByPassport = function(profile, cb) {
 }
 
 p.userGetByAuth = function(authId, cb) {
-    this.table.queryEntity('user', authId, '1', cb);
+    this.table.queryEntity('user', keyToString(authId), '1', function(err, result) {
+        if (!err) {
+            delete result._;
+            result.PartitionKey = keyFromString(result.PartitionKey);
+        }
+        cb(err, result);
+    });
 }
 
 p.userInsert = function(user, cb) {
+    user.PartitionKey = keyToString(user.PartitionKey);
     this.table.insertEntity('user', user, cb);
 }
 

@@ -22,17 +22,20 @@ exports.init = function(app) {
 	app.use(onRequest);
 
 	passport.serializeUser(function(user, done) {
-		console.log("passport.serializeUser:");
-		console.dir(user);
+		//console.log("passport.serializeUser:");
+		//console.dir(user);
 		done(null, user.id);
 	});
 
 	passport.deserializeUser(function(id, done) {
-        console.log("passport.deserializeUser: " + id);
-		data.users.getByAuth(id, function (user) {
+		data.users.getByAuth(id, function (err, user) {
             console.log("passport.deserializeUser.byAuth: " + id);
-            console.dir(user);
-			done(null, user);
+            if (err) {
+                console.dir(err);
+            } else {
+                console.dir(user);
+            }
+			done(err, user);
 		});
 	});
 

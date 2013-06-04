@@ -1,4 +1,5 @@
 {
+    "root":"http://{some_domain.com}",
     "auth":{
     	"google": {
 		},

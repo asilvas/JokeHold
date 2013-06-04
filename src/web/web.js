@@ -59,7 +59,7 @@ exports.init = function() {
         app.use(express.cookieParser('wowsah'));
         app.use(express.session({
         	secret: config.session.secret,
-			store: new AzureSessionStore()
+			store: new AzureSessionStore(config.store.azure)
 		}));
         app.use("/res", express.static(path.join(__dirname, '..', 'res')));
     });

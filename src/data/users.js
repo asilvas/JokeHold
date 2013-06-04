@@ -4,7 +4,7 @@ var
 
 exports.getOrCreateByPassport = function(profile, cb) {
     var db = new DataStore();
-    db.getUserByAuth(profile, cb);
+    db.userGetOrCreateByPassport(profile, cb);
 }
 
 exports.getByAuth = function(authId, cb) {
