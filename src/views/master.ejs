@@ -5,6 +5,20 @@
     <%-head %>
 </head>
 <body>
+    <% if (req.user) { %>
+    <ul>
+        <li>Welcome, <%-req.user.displayname %></li>
+        <li><hr /></li>
+        <li><a href="/user/signOut">Sign out</a></li>
+    </ul>
+    <% } else { %>
+    <ul>
+        <li><a href="/user/google">Sign in with Google</a></li>
+        <li><a href="/user/facebook">Sign in with Facebook</a></li>
+        <li><a href="/user/twitter">Sign in with Twitter</a></li>
+    </ul>
+    <% } %>
+
     <%-content %>
 </body>
 </html>
