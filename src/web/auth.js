@@ -1,6 +1,6 @@
 var
     config = require('../config.json'),
-    data = require('../data/data'),
+    data = require('../data/client'),
     passport = require('passport'),
     GoogleStrategy = require('passport-google').Strategy,
     FacebookStrategy = require('passport-facebook').Strategy,
@@ -28,7 +28,7 @@ exports.init = function(app) {
 	});
 
 	passport.deserializeUser(function(id, done) {
-		data.users.getByAuth(id, function (err, user) {
+		data.users.get(id, function (err, user) {
             console.log("passport.deserializeUser.byAuth: " + id);
             if (err) {
                 console.dir(err);

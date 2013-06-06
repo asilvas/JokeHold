@@ -16,7 +16,7 @@ exports.init = function() {
     app = express();
     server = http.createServer(app);
     port = parseInt(process.env.PORT) || 5000;
-/*    io = require('socket.io').listen(server);
+    /*io = require('socket.io').listen(server);
 
 
     io.configure('production', function(){
@@ -42,7 +42,6 @@ exports.init = function() {
         ]);
     });
 */
-
     app.configure(function () {
         //app.set('port', port);
         app.set('views', __dirname + '/../views');
@@ -59,7 +58,7 @@ exports.init = function() {
         app.use(express.cookieParser('wowsah'));
         app.use(express.session({
         	secret: config.session.secret,
-			store: new AzureSessionStore(config.store.azure)
+			store: new AzureSessionStore(config.store.options)
 		}));
         app.use("/res", express.static(path.join(__dirname, '..', 'res')));
     });

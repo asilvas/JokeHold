@@ -1,6 +1,7 @@
 var
     async = require("async"),
-    web = require('./web/web')
+    web = require('./web/web'),
+    ranks = require('./web/ranks')
 ;
 
 function run()
@@ -11,7 +12,9 @@ function run()
     
     async.series([
         initDB, // blocking
-        initWeb
+        initCache, // blocking
+        initRanks, // blocking
+        initWeb // blocking
     ], function(err, results) {
         // done
     });
@@ -22,8 +25,17 @@ function initDB(cb){
     db.onStart(cb);
 }
 
+function initCache(cb){
+    var cache = new (require("./data/cache").DataCache)();
+    cache.onStart(cb);
+}
+
 function initWeb(cb){
     web.init(cb);
+}
+
+function initRanks(cb){
+    ranks.init(cb);
 }
 
 run();
