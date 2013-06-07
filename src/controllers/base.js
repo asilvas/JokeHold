@@ -20,11 +20,11 @@ exports.render = function(req, res, master, view, options) {
     if (!template){ // cache views
         template = {
             str: fs.readFileSync(viewPath, 'utf8')
-        }
+        };
         templateCache[viewPath] = template;
     }
 
     options.content = ejs.render(template.str, options);
 
     res.render(master, options);
-}
+};

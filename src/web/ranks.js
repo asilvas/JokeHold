@@ -8,7 +8,7 @@ var rankthis;
 
 exports.init = function(cb) {
     rankthis = new RankThis(cb);
-}
+};
 
 function RankThis(cb) {
     this.init(cb);
@@ -28,17 +28,17 @@ p.init = function(cb) {
         
         me.initTasks();
     });
-}
+};
 
 p.initTasks = function() {
     this.cardsTimer = setInterval(this.cardsCallback, 55000);
     this.matchesTimer = setInterval(this.matchesCallback, 65000);
-}
+};
 
 p.cardsCallback = function() {
     data.ranks.cardsGetUpdates();
-}
+};
 
 p.matchesCallback = function() {
     data.ranks.matchesGetUpdates();
-}
+};

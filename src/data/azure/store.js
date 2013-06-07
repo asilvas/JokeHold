@@ -32,11 +32,11 @@ p.onStart = function(cb)
     ], function(err, results){
         cb();
     });
-}
+};
 
 p.initUser = function(cb){
     this.table.createTableIfNotExists('user', cb);
-}
+};
 
 p.getOne = function(table, id, cb) {
     this.table.queryEntity(table, id, '1', function(err, result) {
@@ -45,7 +45,7 @@ p.getOne = function(table, id, cb) {
         }
         cb(err, result);
     });
-}
+};
 
 p.getAll = function(table, cb) {
     var query = azure.TableQuery
@@ -61,7 +61,7 @@ p.getAll = function(table, cb) {
         }
         cb(err, results);
     });
-}
+};
 
 p.userGetOrCreateByPassport = function(profile, cb) {
     var me = this;
@@ -76,20 +76,20 @@ p.userGetOrCreateByPassport = function(profile, cb) {
                 authProvider: profile.provider,
                 userType: "guest",
                 emails: JSON.stringify(profile.emails)
-            }
+            };
 
             me.userInsert(result, cb);
         } else {
             if (result.name) {
                 result.name = JSON.parse(result.name);
             }
-            if (result.emails && result.emails.indexOf('[') == 0) {
+            if (result.emails && result.emails.indexOf('[') === 0) {
                 result.emails = JSON.parse(result.emails);
             }
             cb(null, result);
         }
     });
-}
+};
 
 p.userGet = function(authId, cb) {
     this.getOne('user', keyToString(authId), function(err, result) {
@@ -98,45 +98,45 @@ p.userGet = function(authId, cb) {
         }
         cb(err, result);
     });
-}
+};
 
 p.userInsert = function(user, cb) {
     user.PartitionKey = keyToString(user.PartitionKey);
     this.table.insertEntity('user', user, cb);
-}
+};
 
 p.cardsGetAll = function(cb) {
     this.getAll('card', cb);
-}
+};
 
 p.cardsGet = function(id, cb) {
     this.getOne('card', id, cb);
-}
+};
 
 p.cardsInsertOrUpdate = function(card, cb) {
     this.table.insertOrUpdateEntity('card', card, cb);
-}
+};
 
 p.matchesGetAll = function(cb) {
     this.getAll('match', cb);
-}
+};
 
 p.matchesGet = function(id, cb) {
     this.getOne('match', id, cb);
-}
+};
 
 p.matchesInsertOrUpdate = function(match, cb) {
     this.table.insertOrUpdateEntity('match', match, cb);
-}
+};
 
 p.votesGetAll = function(cb) {
     this.getAll('vote', cb);
-}
+};
 
 p.votesGet = function(id, cb) {
     this.getOne('vote', id, cb);
-}
+};
 
 p.votesInsertOrUpdate = function(vote, cb) {
     this.table.insertOrUpdateEntity('vote', vote, cb);
-}
+};

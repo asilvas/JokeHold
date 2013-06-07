@@ -10,4 +10,4 @@ exports.logout = function (req, res) {
 	req.session.regenerate(function(err) {
 		res.redirect('/');
 	});
-}
+};

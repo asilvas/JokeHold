@@ -15,7 +15,7 @@ var app, server, port, io;
 exports.init = function() {
     app = express();
     server = http.createServer(app);
-    port = parseInt(process.env.PORT) || 5000;
+    port = parseInt(process.env.PORT, 10) || 5000;
     /*io = require('socket.io').listen(server);
 
 
@@ -57,7 +57,7 @@ exports.init = function() {
         app.use(express.methodOverride());
         app.use(express.cookieParser('wowsah'));
         app.use(express.session({
-        	secret: config.session.secret,
+            secret: config.session.secret,
 			store: new AzureSessionStore(config.store.options)
 		}));
         app.use("/res", express.static(path.join(__dirname, '..', 'res')));
@@ -75,4 +75,4 @@ exports.init = function() {
             console.log("server.listen.err: " + err);
         }
     });
-}
+};

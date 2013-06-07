@@ -72,7 +72,7 @@ exports.init = function(app) {
 		passport.use(
 			new FacebookStrategy(fb_ops,
 				function(accessToken, refreshToken, profile, done) {
-    				data.users.getOrCreateByPassport(profile, function (user) {
+                    data.users.getOrCreateByPassport(profile, function (user) {
 						done(null, profile);
 					});
 				}
@@ -92,7 +92,7 @@ exports.init = function(app) {
 		passport.use(
 			new TwitterStrategy(tw_opts,
 				function(token, tokenSecret, profile, done) {
-    				data.users.getOrCreateByPassport(profile, function (user) {
+                    data.users.getOrCreateByPassport(profile, function (user) {
 						done(null, profile);
 					});
 				}
@@ -105,4 +105,4 @@ exports.init = function(app) {
 		);
 	}
 	
-}
+};

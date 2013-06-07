@@ -28,7 +28,7 @@ p.onStart = function(cb)
     ], function(err, results){
         cb();
     });
-}
+};
 
 p.initSubscription = function(cb){
     var me = this;
@@ -54,15 +54,16 @@ p.initSubscription = function(cb){
             cb();
         });
     });
-}
+};
 
 /* eventually look into caching the hierchy itself for fast lookups. the
    complexity will come from keeping it consistent. a task for another day.
 */
 p.buildCacheFromKey = function(key) {
     var parts = key.split('/');
-    if (parts.length == 0)
+    if (parts.length === 0) {
         throw "Invalid Key";
+    }
     var parent = $cache.root;
     var dir;
     var val = parent[dir];
@@ -82,15 +83,15 @@ p.buildCacheFromKey = function(key) {
     }
 
     return { parent: parent, val: val, dir: dir };
-}
+};
 
 // super fast gets
 p.get = function(key) {
     return $cache.dict[key];
-}
+};
 p.getAll = function(key) {
     return this.buildCacheFromKey(key).val;
-}
+};
 
 p.set = function(key, val) {
     // set is a bit slower so that gets are optimized...
@@ -109,4 +110,4 @@ p.set = function(key, val) {
     
     // inform the bus of the change
     this.bus.sendTopicMessage(config.cache.options.topic, { key: key, val: val });
-}
+};
