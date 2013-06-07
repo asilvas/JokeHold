@@ -38,12 +38,12 @@ module.exports = function(grunt) {
             { dest: 'bin/res/master.js', src: ['src/res/*.ts'] }
         ],
         options: {
-          module: 'amd', //or commonjs
-          target: 'es5', //or es3
-          base_path: 'src/res',
-          sourcemap: false,
-	      fullSourceMap: false,
-          declaration: false
+            module: 'amd', //or commonjs
+            target: 'es5', //or es3
+            base_path: 'src/res',
+            sourcemap: false,
+            fullSourceMap: false,
+            declaration: false
         }
       }
     },
@@ -67,6 +67,18 @@ module.exports = function(grunt) {
     watch: {
         files: 'src/res/**/*.ts',
         tasks: ['typescript:res']
+    },
+    jshint: {
+        files: ['Gruntfile.js', 'src/**/*.js'],
+        options: {
+            curly: true,
+            eqeqeq: false,
+            eqnull: true,
+            browser: true,
+            globals: {
+                jQuery: true
+            }
+        }
     }
   });
 
@@ -76,10 +88,12 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-sass');
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-cssmin');
+  grunt.loadNpmTasks('grunt-contrib-jshint');
 
   // tasks
   grunt.registerTask('watch', ['watch']);
-  grunt.registerTask('default', ['clean:bin', 'copy:main', 'typescript:res', 'uglify:res', 'sass:res', 'cssmin:res', 'clean:cleanup']);
-  grunt.registerTask('release', ['clean:bin', 'copy:main', 'copy:release', 'typescript:res', 'uglify:res', 'sass:res', 'cssmin:res', 'clean:cleanup']);
+  grunt.registerTask('default', ['jshint', 'clean:bin', 'copy:main', 'typescript:res', 'uglify:res', 'sass:res', 'cssmin:res', 'clean:cleanup']);
+  grunt.registerTask('release', ['jshint', 'clean:bin', 'copy:main', 'copy:release', 'typescript:res', 'uglify:res', 'sass:res', 'cssmin:res', 'clean:cleanup']);
+  grunt.registerTask('build', ['jshint', 'copy:main']);
 
 };
