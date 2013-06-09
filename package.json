@@ -23,6 +23,7 @@
     "azure":  "latest",
     "async": "latest",
     "connect": "latest",
+    "dateformat": "latest",
     "ejs": "latest",
     "express": "latest",
     "express-session-azure": "latest",
